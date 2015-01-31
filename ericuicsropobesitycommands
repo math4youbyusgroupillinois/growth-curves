@@ -1,0 +1,3 @@
+typename time0 varname;
+int count;  // Set aside storage space for count
+count = 0.001;  //Store 0.001 in count
