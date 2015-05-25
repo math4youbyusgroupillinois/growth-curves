@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Growth-curves by math4youbyusgroupillinois</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Growth-curves</h1>
+        <h2>Statistical models of children&#39;s growth curves that predict which kids are at risk of obesity.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/math4youbyusgroupillinois/growth-curves/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/math4youbyusgroupillinois/growth-curves/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/math4youbyusgroupillinois/growth-curves" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="growth-curves-childhood-obesity-prediction" class="anchor" href="#growth-curves-childhood-obesity-prediction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Growth curves: childhood obesity prediction</h1>
+
+<p><a href="http://www.northshore.org/"><img src="http://dssg.io/img/partners/northshore.jpg" alt="NorthShore Hopsital"></a></p>
+
+<p>Statistical models of children's growth curves that predict which kids are at risk of obesity.</p>
+
+<p>This is project is a part of the 2013 <a href="http://www.dssg.io">Data Science for Social Good</a> fellowship, in partnership with <a href="http://www.northshore.org/">NorthShore Hospital</a>.</p>
+
+<h2>
+<a id="the-problem-obesity-epidemic" class="anchor" href="#the-problem-obesity-epidemic" aria-hidden="true"><span class="octicon octicon-link"></span></a>The problem: obesity epidemic</h2>
+
+<p>Obesity is a rapidly growing epidemic in the US. More than a third of American adults are obese, and another third are overweight. If this trend holds, 42% of American adults will be obese by 2030 (Finkleson et al., 2012), making obesity the leading public health challenge of our time.</p>
+
+<p>Excessive weight is bad for people’s health, wallet, and psyche. Obese adults are at increased risk for a long list of diseases, from heart disease to diabetes to cancer. Obesity also puts pressure on already tight healthcare budgets - on average, obese adults have medical bills that are 42% greater than those of normal weight adults (Finkelstein et al. 2009). </p>
+
+<p>Obesity is hard to tackle once it sinks in, so medical experts regard early prevention as the most promising method for stemming the obesity epidemic. That’s because physical exercise and good nutrition can keep children from becoming obese in the first place.</p>
+
+<p>But how can we predict which kids are at risk of becoming obese as they grow, so that we can intervene before it's too late?</p>
+
+<p><strong><a href="https://github.com/dssg/growth-curves/wiki/problem">To learn more about the obesity epidemic and early prevention, read the wiki.</a></strong></p>
+
+<h2>
+<a id="the-solution-predictive-modeling-using-electronic-medical-records" class="anchor" href="#the-solution-predictive-modeling-using-electronic-medical-records" aria-hidden="true"><span class="octicon octicon-link"></span></a>The solution: predictive modeling using electronic medical records</h2>
+
+<p>Working with NorthShore University Healthsystem in Evanston, a Chicago suburb, we wanted to determine whether we could find patterns in a child’s growth trajectory that might indicate he or she was at risk for becoming obese later on. Nearly all children have their height and weights measured and recorded on a regular basis when they visit their pediatrician. Do early warning signals exist in this ubiquitous and routinely collected data?</p>
+
+<p>To discover these patterns, we obtained anonimized electronic medical records from NorthShore on the height, weight, and body mass index (BMI) measurements of young patients over the years. (BMI is a way to keep track of body fat, calculated from the person’s weight (in kilograms) divided by the person’s height (in meters) squared.)</p>
+
+<p>We wanted to detect if any of these children experienced a physical phenomenon called <strong>adiposity rebound</strong>, when a child's BMI dips and rebounds between age 5 to 6 (Whitaker et al., 1998; Williams and Goulding, 2009). Small-scale studies have suggested that early adiposity rebound is associated with increased risk of adult obesity. So we wanted to know if this phenomenon was present in the NortShore's patient population, and detectable in routinely collected electronic medical records. </p>
+
+<p><strong><a href="https://github.com/dssg/growth-curves/wiki/methodology">For more on our methodology, read the wiki.</a></strong></p>
+
+<h2>
+<a id="project-layout" class="anchor" href="#project-layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project layout</h2>
+
+<p>There are three components to the project. Python code for this work can be found in <code>code</code>.</p>
+
+<h3>
+<a id="cleaning-up-the-growth-measurements-and-calculating-percentiles" class="anchor" href="#cleaning-up-the-growth-measurements-and-calculating-percentiles" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cleaning up the growth measurements and calculating percentiles</h3>
+
+<p>In <code>code/init_processing/</code>, we first clean up NortShore's EMR growth measurements by keeping individuals with enough datapoints and removing extreme outliers. We then aggregate the measurements into percentiles for each gender. We also isolate subsets of the population that we are interested in (e.g. kids who were obese at age 5).</p>
+
+<h3>
+<a id="visualizing-the-growth-curves" class="anchor" href="#visualizing-the-growth-curves" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualizing the growth curves</h3>
+
+<p>In <code>code/visualize</code>, we plot the percentiles in the form of growth charts. We can also compare our growth charts to growth charts from the Center for Disease Control (CDC).</p>
+
+<h3>
+<a id="analyzing-the-adiposity-rebound-for-children" class="anchor" href="#analyzing-the-adiposity-rebound-for-children" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analyzing the adiposity rebound for children</h3>
+
+<p>In <code>code/adiposity_rebound</code>, we attempt to detect adiposity rebound in all NortShore patients whose growth curves extend past the age of 5 (due to available EMR data). We then run linear regressions and find that age at adiposity rebound is a statistically significant predictor of a child's final BMI percentile, and thus of their obesity risk.</p>
+
+<h2>
+<a id="the-data-growth-measurements-of-children" class="anchor" href="#the-data-growth-measurements-of-children" aria-hidden="true"><span class="octicon octicon-link"></span></a>The data: growth measurements of children</h2>
+
+<p>NorthShore provided us with the height and weight measurements of over 23,000 de-identified children. NorthShore's EMR systems captured these records over the past 6 years. The data looks like this: </p>
+
+<table>
+<thead>
+<tr>
+<th align="right">id</th>
+<th align="center">gender</th>
+<th align="center">race_ethnicity</th>
+<th align="center">age</th>
+<th align="center">bmi</th>
+<th align="center">ht</th>
+<th align="left">wt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">1</td>
+<td align="center">F</td>
+<td align="center">Caucasian</td>
+<td align="center">10</td>
+<td align="center">28.4</td>
+<td align="center">59.3</td>
+<td align="left">142</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="center">F</td>
+<td align="center">Caucasian</td>
+<td align="center">11</td>
+<td align="center">29.3</td>
+<td align="center">61.2</td>
+<td align="left">156</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="center">M</td>
+<td align="center">African American</td>
+<td align="center">4.04</td>
+<td align="center">17.9</td>
+<td align="center">42.5</td>
+<td align="left">46</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="center">M</td>
+<td align="center">African American</td>
+<td align="center">5.05</td>
+<td align="center">17.58</td>
+<td align="center">45.6</td>
+<td align="left">52</td>
+</tr>
+</tbody>
+</table>
+
+<p>We have the patients’ gender, race, and ethnicities, along with their height, weight, and BMI measurements at different ages, from the ages of 0 to 19 yrs.</p>
+
+<p>Due to the sensitive nature of this medical data, we aren't able to share it publicly. If you're interested in working with us, please get in touch.</p>
+
+<p><strong><a href="https://github.com/dssg/growth-curves/wiki/data">To learn more about EMR data, read the wiki.</a></strong></p>
+
+<p>However, we are able to provide the height, weight, and BMI data the U.S. Center for Disease Control and Prevention (CDC) uses for their growth charts. This reference data can be found at <code>data/csv/CDC_data.csv</code></p>
+
+<h2>
+<a id="additional-folders" class="anchor" href="#additional-folders" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional folders</h2>
+
+<p><code>figures/for_wiki/</code> contains figures for the <a href="https://github.com/dssg/growth-curves/wiki/">wiki</a> on our project. </p>
+
+<h2>
+<a id="installation-guide" class="anchor" href="#installation-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation guide</h2>
+
+<p>First you will need to clone the repo. </p>
+
+<pre><code>git clone https://github.com/dssg/growth-curves
+cd growth-curves/
+</code></pre>
+
+<p>Then you will need to install the python dependencies by running 
+<code>pip install -r requirements.txt</code></p>
+
+<h2>
+<a id="team" class="anchor" href="#team" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team</h2>
+
+<p><img src="https://github.com/dssg/dssg-northshore-bmi/blob/master/figures/for_wiki/northshore_team.png?raw=true" align="center"></p>
+
+<h2>
+<a id="contributing-to-the-project" class="anchor" href="#contributing-to-the-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing to the project</h2>
+
+<p>To get in touch, email the team at <a href="mailto:dssg-northshore@googlegroups.com">dssg-northshore@googlegroups.com</a>.</p>
+
+<h2>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h2>
+
+<p>Finkelstein, E.A., Trogdon, J.G., Cohen, J.W., and Dietz., W., 2009. Annual medical spending attributable to obesity: Payer- and service-specific estimates. Health Affairs, 28(5): w822-31.</p>
+
+<p>Finkelstein, E.A., Khavjou, O.A., Thompson, H., Trogdon, J.G., Pan, L., Sherry, B., and Dietz, W., 2012. Obesity and severe obesity forecasts through 2030. American Journal of Preventive Medicine, 42(6): 563-570.</p>
+
+<p>Whitaker R.C., Pepe M.S., Wright J.A., Seidel K.D., and Dietz W.H., 1998. Early adiposity rebound and the risk of adult obesity. Pediatrics, 101(3): e5.</p>
+
+<p>Williams, S.M. and Goulding, A, 2009. Patterns of growth associated with the timing of adiposity rebound. Obesity, 17(2): 335-41.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Copyright (C) 2013 <a href="http://dssg.io">Data Science for Social Good Fellowship at the University of Chicago</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-42065315-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
